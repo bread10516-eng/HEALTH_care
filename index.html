@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare — Premium Health & Dieting Hub</title>
+  <meta name="description" content="Healthcare provides customized health, nutrition, and workout programs tailored specifically for men and women. Optimize your diet, calculate macros, and track habits.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-men">
+  <!-- Dynamic Glow Backgrounds -->
+  <div class="glow-bg glow-primary"></div>
+  <div class="glow-bg glow-secondary"></div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        <span class="logo-text">HEALTH<span>CARE</span></span>
+      </div>
+      <div class="gender-switch-container">
+        <button id="btn-switch-men" class="switch-btn active" onclick="setGender('men')">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="10" cy="14" r="5" />
+            <path d="M19 5L13.5 10.5M19 5h-5M19 5v5" />
+          </svg>
+          Men's Mode
+        </button>
+        <button id="btn-switch-women" class="switch-btn" onclick="setGender('women')">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="9" r="6" />
+            <path d="M12 15v6M9 18h6" />
+          </svg>
+          Women's Mode
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <span class="badge" id="hero-badge">PERFORMANCE & VITALITY</span>
+        <h1 id="hero-title">Sculpt Your Peak Strength & Diet</h1>
+        <p id="hero-subtitle">Elevate your daily nutrition and training routine with tailored recommendations driven by science. Engineered for your body's optimal output.</p>
+        <div class="hero-actions">
+          <a href="#calculator-section" class="btn-primary">Calculate Your Macros</a>
+          <a href="#planner-section" class="btn-secondary">Explore Meal Plans</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="visual-card-wrapper">
+          <div class="visual-card main-visual-card">
+            <div class="visual-header">
+              <span class="pill" id="visual-pill-gender">MENS CORE</span>
+              <span id="visual-title">HYPERTROPHY & DEFICIT</span>
+            </div>
+            <div class="visual-body">
+              <div class="visual-metric">
+                <span class="metric-val" id="visual-metric-val">2,450</span>
+                <span class="metric-label">Target Calories / Day</span>
+              </div>
+              <div class="visual-bars">
+                <div class="bar-group">
+                  <div class="bar-label">Protein <span id="visual-p-val">180g</span></div>
+                  <div class="bar-container"><div class="bar-fill" id="visual-p-bar" style="width: 35%"></div></div>
+                </div>
+                <div class="bar-group">
+                  <div class="bar-label">Carbs <span id="visual-c-val">220g</span></div>
+                  <div class="bar-container"><div class="bar-fill" id="visual-c-bar" style="width: 45%"></div></div>
+                </div>
+                <div class="bar-group">
+                  <div class="bar-label">Fats <span id="visual-f-val">65g</span></div>
+                  <div class="bar-container"><div class="bar-fill" id="visual-f-bar" style="width: 20%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Overview -->
+  <main class="container main-dashboard">
+    
+    <!-- Section 1: Health & Macro Calculator -->
+    <section id="calculator-section" class="dashboard-section">
+      <div class="section-header">
+        <h2>Personalized Macro & Calorie Calculator</h2>
+        <p>Input your parameters to instantly establish your daily Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure (TDEE).</p>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Form Panel -->
+        <div class="glass-card calculator-card">
+          <form id="calculator-form" onsubmit="event.preventDefault(); calculateMetrics();">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="input-age">Age (years)</label>
+                <input type="number" id="input-age" min="15" max="80" value="28" required>
+              </div>
+              <div class="form-group">
+                <label for="input-weight">Weight (kg)</label>
+                <input type="number" id="input-weight" min="30" max="200" value="78" required>
+              </div>
+              <div class="form-group">
+                <label for="input-height">Height (cm)</label>
+                <input type="number" id="input-height" min="100" max="250" value="180" required>
+              </div>
+              <div class="form-group">
+                <label for="input-activity">Activity Level</label>
+                <select id="input-activity" required>
+                  <option value="1.2">Sedentary (Little/no exercise)</option>
+                  <option value="1.375">Light (Exercise 1-3 days/week)</option>
+                  <option value="1.55" selected>Moderate (Exercise 3-5 days/week)</option>
+                  <option value="1.725">Active (Exercise 6-7 days/week)</option>
+                  <option value="1.9">Very Active (Heavy athletic training)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label>Your Goal</label>
+              <div class="radio-tiles">
+                <label class="radio-tile">
+                  <input type="radio" name="goal" value="lose" checked>
+                  <div class="tile-content">
+                    <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 5v14M5 12h14" style="transform: rotate(45deg); transform-origin: center;"/>
+                    </svg>
+                    <span>Fat Loss</span>
+                  </div>
+                </label>
+                <label class="radio-tile">
+                  <input type="radio" name="goal" value="maintain">
+                  <div class="tile-content">
+                    <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M5 12h14"/>
+                    </svg>
+                    <span>Maintenance</span>
+                  </div>
+                </label>
+                <label class="radio-tile">
+                  <input type="radio" name="goal" value="gain">
+                  <div class="tile-content">
+                    <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 5v14M5 12h14"/>
+                    </svg>
+                    <span>Muscle Gain</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary calculate-btn">
+              <span>Recalculate Plan</span>
+              <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- Results Display Panel -->
+        <div class="glass-card results-card">
+          <div class="results-layout">
+            <div class="chart-box">
+              <div class="chart-wrapper">
+                <canvas id="macroChart" width="200" height="200"></canvas>
+                <div class="chart-center">
+                  <span class="calories-num" id="calories-display">2,154</span>
+                  <span class="calories-unit">kcal / day</span>
+                </div>
+              </div>
+              <div class="chart-legend">
+                <div class="legend-item protein">
+                  <span class="dot"></span>
+                  <span class="label">Protein</span>
+                  <span class="val" id="legend-p-val">162g</span>
+                </div>
+                <div class="legend-item carbs">
+                  <span class="dot"></span>
+                  <span class="label">Carbs</span>
+                  <span class="val" id="legend-c-val">215g</span>
+                </div>
+                <div class="legend-item fats">
+                  <span class="dot"></span>
+                  <span class="label">Fats</span>
+                  <span class="val" id="legend-f-val">72g</span>
+                </div>
+              </div>
+            </div>
+            <div class="metrics-details">
+              <div class="detail-row">
+                <span class="title">Basal Metabolic Rate (BMR):</span>
+                <span class="value" id="bmr-display">1,780 kcal</span>
+              </div>
+              <div class="detail-row">
+                <span class="title">Total Maintenance (TDEE):</span>
+                <span class="value" id="tdee-display">2,654 kcal</span>
+              </div>
+              <div class="detail-row">
+                <span class="title">Diet Style Adjustment:</span>
+                <span class="value text-highlight" id="goal-adjustment">-500 kcal (Deficit)</span>
+              </div>
+              <p class="summary-para" id="calculator-summary-text">
+                Your body burns approximately 2,654 calories daily with moderate activity. Consuming 2,154 calories forces your body to utilize adipose tissue for energy, triggering a safe and healthy fat loss phase.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Diet & Meal Planner -->
+    <section id="planner-section" class="dashboard-section">
+      <div class="section-header">
+        <h2>Personalized Diet & Nutrition Planner</h2>
+        <p>Select your preferred nutrition paradigm. The meals will automatically optimize to align with your gender constraints, target calories, and goals.</p>
+        <div class="diet-filter-container">
+          <button class="diet-tab active" onclick="setDietType('balanced')">Balanced</button>
+          <button class="diet-tab" onclick="setDietType('highprotein')">High Protein</button>
+          <button class="diet-tab" onclick="setDietType('keto')">Keto / Low Carb</button>
+          <button class="diet-tab" onclick="setDietType('vegan')">Plant-Based / Vegan</button>
+        </div>
+      </div>
+
+      <!-- Meal Cards Grid -->
+      <div class="grid-4col" id="meals-grid">
+        <!-- Dynamic Meal Cards will be injected here via JavaScript -->
+      </div>
+
+      <div class="meal-plan-footer glass-card">
+        <div class="footer-info">
+          <h3>Need this meal plan on the go?</h3>
+          <p>Download a cleanly formatted daily summary containing detailed instructions, calories, and ingredients.</p>
+        </div>
+        <button class="btn-primary" onclick="window.print()">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+          </svg>
+          Print / PDF Export
+        </button>
+      </div>
+    </section>
+
+    <!-- Section 3: Training & Fitness Programs -->
+    <section id="workout-section" class="dashboard-section">
+      <div class="section-header">
+        <h2>Optimized Training Programs</h2>
+        <p id="workout-section-desc">Training blueprints specifically balanced for biological differences, hormone structures, and strength objectives.</p>
+      </div>
+
+      <div class="grid-3col" id="workouts-grid">
+        <!-- Dynamic Workout Cards injected via JS -->
+      </div>
+    </section>
+
+    <!-- Section 4: Daily Habits & Water Tracker -->
+    <section id="habits-section" class="dashboard-section">
+      <div class="grid-2col-equal">
+        
+        <!-- Water intake glass card -->
+        <div class="glass-card water-tracker-card">
+          <div class="card-header-icon">
+            <svg class="header-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22a7 7 0 0 0 7-7c0-4.3-7-11-7-11S5 10.7 5 15a7 7 0 0 0 7 7z"/>
+            </svg>
+            <div>
+              <h3>Daily Water Hydration</h3>
+              <p>Keep cell hydration high to optimize metabolic functions.</p>
+            </div>
+          </div>
+          <div class="water-progress-visual">
+            <div class="water-wave-container">
+              <div class="water-wave" id="water-wave-fill" style="height: 37.5%;"></div>
+              <div class="water-text">
+                <span class="current-water" id="current-water-text">1.25</span>
+                <span class="target-water">/ 3.25 Liters</span>
+              </div>
+            </div>
+          </div>
+          <div class="water-controls">
+            <button class="btn-water-decrement" onclick="adjustWater(-0.25)">-250ml</button>
+            <button class="btn-water-increment" onclick="adjustWater(0.25)">+250ml</button>
+          </div>
+        </div>
+
+        <!-- Habits checklist -->
+        <div class="glass-card habits-card">
+          <div class="card-header-icon">
+            <svg class="header-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <div>
+              <h3>Consistency Tracker</h3>
+              <p>Track foundational health protocols that amplify dieting results.</p>
+            </div>
+          </div>
+          <div class="habits-list">
+            <label class="habit-item">
+              <input type="checkbox" onchange="toggleHabit(this)" data-weight="1">
+              <span class="checkbox-custom"></span>
+              <span class="habit-title">Sleep 7-8 hours (Hormonal reboot)</span>
+            </label>
+            <label class="habit-item">
+              <input type="checkbox" onchange="toggleHabit(this)" data-weight="1">
+              <span class="checkbox-custom"></span>
+              <span class="habit-title">Walk 10,000 steps (Cardio base)</span>
+            </label>
+            <label class="habit-item">
+              <input type="checkbox" onchange="toggleHabit(this)" data-weight="1">
+              <span class="checkbox-custom"></span>
+              <span class="habit-title">Consume nutrient dense greens</span>
+            </label>
+            <label class="habit-item">
+              <input type="checkbox" onchange="toggleHabit(this)" data-weight="1">
+              <span class="checkbox-custom"></span>
+              <span class="habit-title">Limit screen time before bed</span>
+            </label>
+          </div>
+          <div class="habits-progress">
+            <div class="progress-details">
+              <span>Today's Score</span>
+              <span id="habits-score">0%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="habits-progress-bar" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-branding">
+        <span class="logo-text">HEALTH<span>CARE</span></span>
+        <p>Science-backed performance and nutrition guidelines for physical excellence.</p>
+      </div>
+      <div class="footer-links">
+        <p>&copy; 2026 Healthcare. Designed for men and women who demand longevity and athletic vitality.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
